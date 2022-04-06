@@ -26,7 +26,7 @@
 		</div>
 		<DefaultRoom
 			v-if="userConnected"
-			:roomName="roomSelected"
+			:roomName="currentRoom"
 			:username="username"
 			:socket="socket"
 		/>
@@ -42,11 +42,8 @@ const socket = io("http://localhost:8080");
 const username = ref("");
 const rooms = ref([]);
 const roomSelected = ref("");
+const currentRoom = ref("");
 const userConnected = ref(false);
-
-socket.on("connect", () => {
-	roomSelected.value = rooms.value[0];
-});
 
 const userConnectToRoom = (e: Event) => {
 	e.preventDefault();
@@ -56,6 +53,7 @@ const userConnectToRoom = (e: Event) => {
 			roomSelected: roomSelected.value,
 		});
 		userConnected.value = true;
+		currentRoom.value = roomSelected.value;
 	}
 };
 
@@ -65,7 +63,11 @@ socket.on("userNameUpdated", (newName) => {
 
 socket.on("roomList", (roomList) => {
 	rooms.value = roomList;
-	roomSelected.value = rooms.value[rooms.value.length - 1];
+	roomSelected.value = rooms.value[0];
+});
+
+socket.on("roomChanged", (newRoom) => {
+	currentRoom.value = newRoom;
 });
 
 socket.on("logoutOk", () => {
