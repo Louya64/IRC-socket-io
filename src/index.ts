@@ -127,10 +127,6 @@ server.ready().then(() => {
 
 		socket.on("updateRoomName", (newName) => {
 			//faut l'ancien nom...
-			// if (
-			// 	socket.data.roomsCreated &&
-			// 	socket.data.roomsCreated.includes(roomName)
-			// ) {}
 		});
 
 		socket.on("deleteRoom", async (roomName) => {
