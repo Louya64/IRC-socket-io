@@ -78,10 +78,11 @@ let index = 0;
 const listenToKeyValue = (e: KeyboardEvent) => {
 	// commands
 	if (matchingCommands.value.length) {
-		e.preventDefault();
 		if (e.key === "Enter") {
+			e.preventDefault();
 			validateCommand(matchingCommands.value[index]);
 		} else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+			e.preventDefault();
 			if (firstArrowPreset) {
 				if (e.key === "ArrowUp") {
 					index = matchingCommands.value.length - 1;
@@ -99,6 +100,8 @@ const listenToKeyValue = (e: KeyboardEvent) => {
 				}
 			}
 			document.getElementById(`command${index}`)?.focus();
+		} else {
+			document.getElementById("messageToAdd")?.focus();
 		}
 	}
 

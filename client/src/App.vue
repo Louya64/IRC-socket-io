@@ -1,6 +1,25 @@
 <template>
+	<!-- <div v-if="userConnected" class="flex">
+		<div class="w-1/5 h-screen bg-slate-300 sticky top-0 p-10">
+			<ul>
+				<li
+					class="hover: cursor-pointer p-4"
+					@click="userConnectToRoom"
+					v-for="room in rooms"
+				>
+				<RouterLink class="link mx-8" to="/room:roomName"># {{ room }}</RouterLink>
+					
+				</li>
+			</ul>
+		</div>
+		<DefaultRoom
+			:roomName="currentRoom"
+			:username="username"
+			:socket="socket"
+		/>
+	</div> -->
 	<div class="flex bg-slate-400">
-		<div class="w-1/5 h-screen bg-slate-300">
+		<div class="w-1/5 h-screen bg-slate-300 sticky top-0">
 			<form action="" class="w-3/4 mx-auto mt-60">
 				<div class="my-10">
 					<label for="username">Pseudo</label><br />
@@ -31,9 +50,11 @@
 			:socket="socket"
 		/>
 	</div>
+	<!-- <RouterView /> -->
 </template>
 
 <script setup lang="ts">
+// import { RouterLink, RouterView } from "vue-router";
 import { io } from "socket.io-client";
 import { ref } from "vue";
 import DefaultRoom from "./views/DefaultRoom.vue";
